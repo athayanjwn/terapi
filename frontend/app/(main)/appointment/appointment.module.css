@@ -1,0 +1,400 @@
+.page {
+  padding: 28px 36px;
+  background: #f7f5ef;
+  min-height: 100vh;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titleWrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.filterWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.select {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #d6d2c7;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #2a2a2a;
+  outline: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: #a9a391;
+  box-shadow: 0 0 0 3px rgba(169, 163, 145, 0.25);
+}
+
+.userIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #6b7b4a;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.userIconInner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  position: relative;
+}
+
+.userIconInner::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(340px, 1fr));
+  gap: 18px 22px;
+}
+
+@media (max-width: 920px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d8d4c9;
+  border-radius: 18px;
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background: #ece9e2;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarInitial {
+  font-weight: 800;
+  color: #5b5b5b;
+  font-size: 18px;
+}
+
+.cardBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  color: #1b1b1b;
+  line-height: 1.2;
+}
+
+.special {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6a6a6a;
+}
+
+.desc {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #5a5a5a;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnPrimary {
+  background: #6b7b4a;
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  filter: brightness(0.96);
+}
+
+.btnGhost {
+  background: #f2f0ea;
+  color: #3a3a3a;
+  border: 1px solid #d8d4c9;
+}
+
+.btnGhost:hover {
+  background: #ece9e2;
+}
+
+.metaRow {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.metaText {
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pageBtn {
+  border: 1px solid #d8d4c9;
+  background: #fff;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #2a2a2a;
+}
+
+.pageBtnActive {
+  background: #1b1b1b;
+  color: #fff;
+  border-color: #1b1b1b;
+}
+
+.pageBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.state {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #8a1f1f;
+}
+
+.myBtn {
+  border: 1px solid #d6d2c7;
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.myBtn:hover {
+  background: #f2f0ea;
+}
+
+/* ===== Modal ===== */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  padding: 18px;
+}
+
+.modal {
+  width: min(860px, 96vw);
+  max-height: 86vh;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #d8d4c9;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modalHeader {
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1a1a1a;
+}
+.modalSub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #6a6a6a;
+}
+
+.modalClose {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.modalClose:hover {
+  background: #f2f0ea;
+}
+
+.modalState {
+  padding: 12px 16px;
+  color: #6a6a6a;
+}
+.modalErr {
+  padding: 12px 16px;
+  color: #8a1f1f;
+  font-weight: 800;
+}
+.modalOk {
+  padding: 12px 16px;
+  color: #1f7a3a;
+  font-weight: 800;
+}
+
+.modalList {
+  padding: 12px 16px 6px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.modalEmpty {
+  padding: 12px;
+  border: 1px dashed #d8d4c9;
+  border-radius: 14px;
+  color: #6a6a6a;
+}
+
+.modalCard {
+  border: 1px solid #d8d4c9;
+  border-radius: 16px;
+  padding: 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modalInfo {
+  display: grid;
+  gap: 4px;
+}
+.modalLine1 {
+  font-weight: 900;
+}
+.modalLine2 {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.modalActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #d8d4c9;
+  background: #f2f0ea;
+}
+
+.btnSmall {
+  border: none;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.btnDanger {
+  background: #a33a3a;
+  color: #fff;
+}
+
+.modalFooter {
+  padding: 12px 16px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}

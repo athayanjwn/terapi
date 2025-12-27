@@ -1,0 +1,47 @@
+.hero {
+  display: flex;
+  padding: 80px 60px;
+  background: #ebf4da;
+}
+
+.heroLeft {
+  width: 50%;
+}
+
+.heroLeft h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+}
+
+.btnPrimary {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--green-dark);
+  color: white;
+  padding: 12px 26px;
+  border-radius: 8px;
+}
+
+.heroRight {
+  width: 45%;
+}
+
+.insight {
+  padding: 80px 60px;
+}
+
+.assessment {
+  padding: 80px 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.card {
+  padding: 30px;
+  border-radius: 20px;
+  background: #d8ecff;
+}

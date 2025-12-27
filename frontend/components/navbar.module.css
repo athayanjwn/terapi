@@ -1,0 +1,156 @@
+.navbar {
+  padding: 18px 80px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.menu a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #2b2b2b;
+}
+
+.signin {
+  background: var(--green-dark);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile {
+  font-weight: 600;
+  text-decoration: none;
+  color: #2b2b2b;
+}
+
+.logout {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #c0392b;
+}
+
+.userWrap {
+  position: relative;
+}
+
+/* tombol trigger */
+.profileTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f5f7f6;
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.profileTrigger:hover {
+  background: #e9f3ee;
+  border-color: #dbe7df;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* dropdown box */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  z-index: 50;
+}
+
+.dropdownItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: #2b2b2b;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dropdownItem:hover {
+  background: #f5f7f6;
+}
+
+.dangerItem {
+  color: #c0392b;
+}
+
+.dangerItem:hover {
+  background: #fdecea;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.brandText {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111; /* sesuaikan tema */
+}

@@ -1,0 +1,133 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.meta {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.categories {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.category {
+  font-size: 12px;
+  background: #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+  white-space: pre-line;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.actionEdit,
+.actionDelete {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  background: #fff;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.actionEdit:hover {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.actionDelete {
+  border-color: rgba(220, 38, 38, 0.25);
+  color: rgba(220, 38, 38, 0.95);
+}
+
+.actionDelete:hover {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.45);
+  transform: translateY(-1px);
+}
+
+.actionDelete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.category {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: rgba(29, 78, 216, 0.95);
+  border: 1px solid rgba(37, 99, 235, 0.14);
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* BACK BUTTON */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+  background: #104f20;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  cursor: pointer;
+
+  transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease;
+}
+
+.backButton:hover {
+  background: rgba(28, 167, 67, 0.04);
+  color: rgba(0, 0, 0, 0.9);
+  border-color: rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.backButton:active {
+  transform: translateY(0);
+}

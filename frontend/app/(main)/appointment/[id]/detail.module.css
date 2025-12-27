@@ -1,0 +1,451 @@
+.page {
+  padding: 28px 16px;
+  background: #f7f5ef;
+  min-height: 100vh;
+}
+
+.card {
+  max-width: 920px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #d8d4c9;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* ✅ KONSELOR CARD */
+.konselorCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #ebe7dd;
+  background: #fbfaf6;
+}
+
+.konselorLeft {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.avatarWrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 212, 201, 0.9);
+  background: #fff;
+  flex: 0 0 auto;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatarFallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: rgba(17, 24, 39, 0.85);
+}
+
+.konselorInfo {
+  min-width: 0;
+}
+
+.konselorName {
+  font-size: 16px;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-top: 2px;
+}
+
+.konselorSub {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: rgba(55, 65, 81, 0.78);
+  line-height: 1.5;
+}
+
+.dot {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+.badges {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(107, 123, 74, 0.12);
+  border: 1px solid rgba(107, 123, 74, 0.22);
+  color: rgba(46, 65, 25, 0.95);
+  font-weight: 800;
+}
+
+.badgeMuted {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.05);
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  color: rgba(55, 65, 81, 0.85);
+  font-weight: 800;
+}
+
+.konselorRight {
+  flex: 0 0 auto;
+}
+
+.konselorLink {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 212, 201, 0.9);
+  background: #fff;
+  font-weight: 900;
+  font-size: 13px;
+  color: rgba(26, 26, 26, 0.9);
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.konselorLink:hover {
+  background: #f2f0ea;
+  transform: translateY(-1px);
+}
+
+/* CONTROLS */
+.controls {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.control {
+  display: grid;
+  gap: 6px;
+  min-width: 280px;
+}
+
+.label {
+  font-size: 12px;
+  color: #6a6a6a;
+  font-weight: 900;
+}
+
+.help {
+  font-size: 12px;
+  color: rgba(106, 106, 106, 0.95);
+}
+
+.input {
+  border: 1px solid #d6d2c7;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.input:focus {
+  border-color: rgba(107, 123, 74, 0.55);
+  box-shadow: 0 0 0 4px rgba(107, 123, 74, 0.14);
+}
+
+/* META + ALERT */
+.meta {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: #6a6a6a;
+  line-height: 1.5;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #fbfaf6;
+  border: 1px solid #ebe7dd;
+}
+
+.error,
+.ok {
+  margin-top: 12px;
+  font-weight: 900;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid;
+  font-size: 13px;
+}
+
+.error {
+  color: #8a1f1f;
+  background: #fff3f3;
+  border-color: rgba(138, 31, 31, 0.25);
+}
+
+.ok {
+  color: #1f7a3a;
+  background: #f0fff4;
+  border-color: rgba(31, 122, 58, 0.25);
+}
+
+.empty {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px dashed rgba(216, 212, 201, 0.9);
+  background: rgba(242, 240, 234, 0.55);
+  color: rgba(55, 65, 81, 0.9);
+  font-weight: 800;
+  font-size: 13px;
+}
+
+/* SLOTS */
+.grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.slotBtn {
+  border: 1px solid #d8d4c9;
+  border-radius: 16px;
+  padding: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slotBtn:hover {
+  background: #f2f0ea;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.slotBtnDisabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #f2f0ea;
+  transform: none;
+  box-shadow: none;
+}
+
+.slotBtnActive {
+  background: #6b7b4a;
+  color: #fff;
+  border-color: #6b7b4a;
+  box-shadow: 0 10px 22px rgba(107, 123, 74, 0.25);
+}
+
+.slotTime {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.slotSub {
+  font-size: 12px;
+  opacity: 0.88;
+  margin-top: 2px;
+}
+
+/* ACTIONS */
+.actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.primaryBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  background: #6b7b4a;
+  color: #fff;
+  transition: transform 0.12s ease, opacity 0.15s ease;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ghostBtn {
+  border: 1px solid #d8d4c9;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  background: #fff;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.ghostBtn:hover {
+  background: #f2f0ea;
+  transform: translateY(-1px);
+}
+
+.backBottomBtn {
+  margin-left: auto;
+  border: 1px solid #d8d4c9;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, opacity 0.15s ease;
+}
+
+.backBottomBtn:hover {
+  background: #f2f0ea;
+  transform: translateY(-1px);
+}
+
+.backBottomBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .control {
+    min-width: 100%;
+  }
+
+  .konselorCard {
+    flex-direction: column;
+  }
+
+  .konselorRight {
+    width: 100%;
+  }
+
+  .konselorLink {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .primaryBtn,
+  .ghostBtn,
+  .backBottomBtn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.konselorCard {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #ebe7dd;
+  background: #fbfaf6;
+}
+
+.konselorLeft {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.avatarWrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 212, 201, 0.9);
+  background: #fff;
+  flex: 0 0 auto;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatarFallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: rgba(17, 24, 39, 0.85);
+}
+
+.konselorInfo {
+  min-width: 0;
+}
+
+.konselorName {
+  font-size: 16px;
+  font-weight: 900;
+  color: #1a1a1a;
+}
+
+.konselorSub {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: rgba(55, 65, 81, 0.78);
+  font-weight: 800;
+}
+
+.konselorDesc {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(55, 65, 81, 0.9);
+}
+
+.konselorMeta {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(55, 65, 81, 0.75);
+  font-weight: 800;
+}
+
+.dot {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .konselorCard {
+    padding: 12px;
+  }
+  .avatarWrap {
+    width: 48px;
+    height: 48px;
+  }
+}
