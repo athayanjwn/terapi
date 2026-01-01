@@ -24,7 +24,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3001",
-      "https://terapi.vercel.app"
+      "https://terapi-seven.vercel.app"
     ]
   })
 );
