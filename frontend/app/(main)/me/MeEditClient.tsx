@@ -10,6 +10,15 @@ function fromComma(s: string) {
   return s.split(",").map((x) => x.trim()).filter(Boolean);
 }
 
+type GenderEnum = "LAKI_LAKI" | "PEREMPUAN";
+
+function normalizeGender(v?: string | null): GenderEnum | null {
+  const s = String(v ?? "").trim().toUpperCase();
+  if (s === "LAKI_LAKI") return "LAKI_LAKI";
+  if (s === "PEREMPUAN") return "PEREMPUAN";
+  return null;
+}
+
 export default function MeEditClient({ me }: { me: any }) {
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -28,7 +37,9 @@ export default function MeEditClient({ me }: { me: any }) {
   const [bahasa, setBahasa] = useState(toComma(me?.profile?.bahasa));
   const [hari, setHari] = useState(toComma(me?.profile?.hari_praktik));
   const [tglK, setTglK] = useState(me?.profile?.tanggal_lahir ?? "");
-  const [jkK, setJkK] = useState(me?.profile?.jenis_kelamin ?? "");
+  const [jkK, setJkK] = useState<GenderEnum | null>(
+    normalizeGender(me?.profile?.jenis_kelamin)
+  );
 
   // ====== fields mahasiswa ======
   const [namaM, setNamaM] = useState(me?.profile?.nama_mahasiswa ?? "");
@@ -37,7 +48,9 @@ export default function MeEditClient({ me }: { me: any }) {
   const [tahun, setTahun] = useState(me?.profile?.tahun_masuk ?? "");
   const [telM, setTelM] = useState(me?.profile?.nomor_telepon ?? "");
   const [tglM, setTglM] = useState(me?.profile?.tanggal_lahir ?? "");
-  const [jkM, setJkM] = useState(me?.profile?.jenis_kelamin ?? "");
+  const [jkM, setJkM] = useState<GenderEnum | null>(
+    normalizeGender(me?.profile?.jenis_kelamin)
+  );
   const [fotoM, setFotoM] = useState(me?.profile?.foto_profil ?? "");
 
   const canSave = useMemo(() => {
@@ -66,8 +79,7 @@ export default function MeEditClient({ me }: { me: any }) {
           bahasa: fromComma(bahasa),
           hari_praktik: fromComma(hari),
           tanggal_lahir: tglK || null,
-          jenis_kelamin: jkK || null,
-         
+          jenis_kelamin: jkK, // ✅ hanya LAKI_LAKI | PEREMPUAN | null
         };
       } else if (type === "mahasiswa") {
         payload = {
@@ -77,9 +89,8 @@ export default function MeEditClient({ me }: { me: any }) {
           tahun_masuk: tahun.trim(),
           nomor_telepon: telM.trim(),
           tanggal_lahir: tglM || null,
-          jenis_kelamin: jkM || null,
+          jenis_kelamin: jkM, // ✅ hanya LAKI_LAKI | PEREMPUAN | null
           foto_profil: fotoM.trim(),
-         
         };
       } else {
         throw new Error("Tipe profile tidak dikenali.");
@@ -105,8 +116,16 @@ export default function MeEditClient({ me }: { me: any }) {
 
         {(err || ok) && (
           <div className="mt-4 space-y-2">
-            {err && <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{err}</div>}
-            {ok && <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">{ok}</div>}
+            {err && (
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                {err}
+              </div>
+            )}
+            {ok && (
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
+                {ok}
+              </div>
+            )}
           </div>
         )}
 
@@ -125,7 +144,10 @@ export default function MeEditClient({ me }: { me: any }) {
               <Input label="Bahasa (pisah koma)" value={bahasa} onChange={setBahasa} />
               <Input label="Hari Praktik (pisah koma)" value={hari} onChange={setHari} />
               <Input label="Tanggal Lahir (YYYY-MM-DD)" value={tglK} onChange={setTglK} />
-              <Input label="Jenis Kelamin" value={jkK} onChange={setJkK} />
+
+              {/* ✅ FIX: jenis kelamin pakai enum */}
+              <GenderSelect label="Jenis Kelamin" value={jkK} onChange={setJkK} />
+
               <Textarea label="Deskripsi" value={descK} onChange={setDescK} />
             </div>
           ) : (
@@ -136,7 +158,9 @@ export default function MeEditClient({ me }: { me: any }) {
               <Input label="Tahun Masuk" value={tahun} onChange={setTahun} />
               <Input label="Nomor Telepon" value={telM} onChange={setTelM} />
               <Input label="Tanggal Lahir (YYYY-MM-DD)" value={tglM} onChange={setTglM} />
-              <Input label="Jenis Kelamin" value={jkM} onChange={setJkM} />
+
+              {/* ✅ FIX: jenis kelamin pakai enum */}
+              <GenderSelect label="Jenis Kelamin" value={jkM} onChange={setJkM} />
             </div>
           )}
 
@@ -194,6 +218,34 @@ function Textarea({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
+    </div>
+  );
+}
+
+function GenderSelect({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: "LAKI_LAKI" | "PEREMPUAN" | null;
+  onChange: (v: "LAKI_LAKI" | "PEREMPUAN" | null) => void;
+}) {
+  return (
+    <div>
+      <label className="text-xs font-medium text-gray-600">{label}</label>
+      <select
+        className="mt-1 w-full rounded-xl border px-3 py-2 text-sm outline-none focus:border-gray-400 bg-white"
+        value={value ?? ""}
+        onChange={(e) => {
+          const v = e.target.value;
+          onChange(v === "LAKI_LAKI" || v === "PEREMPUAN" ? v : null);
+        }}
+      >
+        <option value="">- Pilih -</option>
+        <option value="LAKI_LAKI">LAKI_LAKI</option>
+        <option value="PEREMPUAN">PEREMPUAN</option>
+      </select>
     </div>
   );
 }

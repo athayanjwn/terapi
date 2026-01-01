@@ -449,3 +449,56 @@
     height: 48px;
   }
 }
+
+/* ===== Jadwal Praktik (Hari + Jam Mulai/Selesai) ===== */
+.practiceBox {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.practiceTitle {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.practiceEmpty {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.practiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.practiceRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.practiceDay {
+  width: 92px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.practiceTimes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.practiceTimePill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}

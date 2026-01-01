@@ -14,16 +14,16 @@ export const login = async (req, res) =>{
 
         res.cookie("access-token", data.access_token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             path: "/",
             maxAge: data.expires_in * 1000
         });;
 
         res.cookie("refresh-token", data.refresh_token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             path: "/",
             maxAge: 30 * 24 * 60 * 60 * 1000,
         })
@@ -89,10 +89,6 @@ export const register = async (req, res) => {
     }
 
     const data = await AuthService.register(name, email, password);
-
-    // optional: buat row profile kamu jika userService memang butuh (kalau sudah ada flow)
-    // misal userService.createUserProfile(data.id, name, email)
-    // kalau userService kamu sudah auto create via trigger DB, bisa skip
 
     return res.status(201).json({
       message: "Registrasi berhasil. Silakan cek email institusi untuk verifikasi.",

@@ -185,7 +185,7 @@ export default class AppointmentService {
                 spesialisasi,
                 foto_profil
             `,
-            { count: "exact" } // penting untuk total
+            { count: "exact" } 
             )
             .order("nama_konselor", { ascending: true })
             .range(from, to);

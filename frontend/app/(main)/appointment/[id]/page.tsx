@@ -73,13 +73,36 @@ function minutesToTime(min: number) {
 }
 
 function overlaps(aStart: string, aEnd: string, bStart: string, bEnd: string) {
-  return timeToMinutes(aStart) < timeToMinutes(bEnd) && timeToMinutes(aEnd) > timeToMinutes(bStart);
+  return (
+    timeToMinutes(aStart) < timeToMinutes(bEnd) &&
+    timeToMinutes(aEnd) > timeToMinutes(bStart)
+  );
 }
 
 function getMinDateTomorrow() {
   const d = new Date();
   d.setDate(d.getDate() + 2);
   return d.toISOString().slice(0, 10);
+}
+
+
+function hariLabel(h: string) {
+  const map: Record<string, string> = {
+    senin: "Senin",
+    selasa: "Selasa",
+    rabu: "Rabu",
+    kamis: "Kamis",
+    jumat: "Jumat",
+    sabtu: "Sabtu",
+    minggu: "Minggu",
+  };
+  const key = String(h || "").toLowerCase();
+  return map[key] ?? key;
+}
+
+function sortHari(a: string, b: string) {
+  const order = ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu", "minggu"];
+  return order.indexOf(a) - order.indexOf(b);
 }
 
 export default function AppointmentBookingPage() {
@@ -100,13 +123,11 @@ export default function AppointmentBookingPage() {
   const [err, setErr] = useState<string | null>(null);
   const [ok, setOk] = useState<string | null>(null);
 
-  // ✅ ambil info konselor (fallback: ambil dari list endpoint)
+  
   useEffect(() => {
     (async () => {
       try {
-        // NOTE: ini fallback saja, karena kamu belum punya endpoint detail konselor
-        // Jika kamu punya endpoint detail, ganti fetch ini dengan /api/konselor/${id}
-        const LIMIT = 50; // biar kemungkinan ketemu lebih besar
+        const LIMIT = 50;
         const res = await fetch(`/api/appointment?page=1&limit=${LIMIT}`, {
           credentials: "include",
           cache: "no-store",
@@ -116,17 +137,20 @@ export default function AppointmentBookingPage() {
 
         const arr = Array.isArray(json?.data) ? (json.data as Konselor[]) : [];
         const found = arr.find((k) => String(k.id) === String(id));
+        console.log(found);
         if (found) {
           setKonselor({
             id: String(found.id),
             nama_konselor: found.nama_konselor,
-            spesialisasi: Array.isArray(found.spesialisasi) ? found.spesialisasi : [],
+            spesialisasi: Array.isArray(found.spesialisasi)
+              ? found.spesialisasi
+              : [],
             foto_profil: found.foto_profil ?? null,
             deskripsi: found.deskripsi ?? null,
           });
         }
       } catch {
-        // silent
+        //
       }
     })();
   }, [id]);
@@ -164,14 +188,17 @@ export default function AppointmentBookingPage() {
         setSelectedStart(null);
 
         const res = await fetch(
-          `/api/appointment/${id}/tanggal?tanggal=${encodeURIComponent(tanggal)}`,
+          `/api/appointment/${id}/tanggal?tanggal=${encodeURIComponent(
+            tanggal
+          )}`,
           {
             credentials: "include",
             cache: "no-store",
           }
         );
         const data = await res.json();
-        if (!res.ok) throw new Error(data?.message || "Gagal mengambil booked slot");
+        if (!res.ok)
+          throw new Error(data?.message || "Gagal mengambil booked slot");
 
         setBooked(Array.isArray(data) ? data : []);
       } catch (e: any) {
@@ -197,7 +224,9 @@ export default function AppointmentBookingPage() {
       }
     }
 
-    return Array.from(new Set(all)).sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
+    return Array.from(new Set(all)).sort(
+      (a, b) => timeToMinutes(a) - timeToMinutes(b)
+    );
   }, [jadwalHariIni]);
 
   function isDisabled(start: string) {
@@ -230,7 +259,8 @@ export default function AppointmentBookingPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data?.message || "Gagal membuat appointment");
+      if (!res.ok)
+        throw new Error(data?.message || "Gagal membuat appointment");
 
       setOk("Appointment berhasil dibuat (PENDING).");
       setSelectedStart(null);
@@ -255,16 +285,41 @@ export default function AppointmentBookingPage() {
 
   const minTanggal = getMinDateTomorrow();
 
+  
+  const jadwalPraktik = useMemo(() => {
+    if (!jadwal.length) return [];
+    const sorted = [...jadwal].sort((x, y) => {
+      const d = sortHari(x.hari, y.hari);
+      if (d !== 0) return d;
+      return timeToMinutes(x.jam_mulai) - timeToMinutes(y.jam_mulai);
+    });
+
+    const groups: Record<string, Jadwal[]> = {};
+    for (const j of sorted) {
+      const h = String(j.hari || "").toLowerCase();
+      if (!groups[h]) groups[h] = [];
+      groups[h].push(j);
+    }
+
+    return Object.entries(groups).map(([hari, items]) => ({
+      hari,
+      items,
+    }));
+  }, [jadwal]);
+
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        {/* ✅ KONSELOR INFO */}
+        {/* KONSELOR INFO */}
         <div className={styles.konselorCard}>
           <div className={styles.konselorLeft}>
             <div className={styles.avatarWrap}>
               {konselor?.foto_profil ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={konselor.foto_profil} alt={konselor.nama_konselor} className={styles.avatar} />
+                <img
+                  src={konselor.foto_profil}
+                  alt={konselor.nama_konselor}
+                  className={styles.avatar}
+                />
               ) : (
                 <div className={styles.avatarFallback}>
                   {getInitial(konselor?.nama_konselor || "Konselor")}
@@ -273,17 +328,47 @@ export default function AppointmentBookingPage() {
             </div>
 
             <div className={styles.konselorInfo}>
-              <div className={styles.konselorName}>{konselor?.nama_konselor || "Konselor"}</div>
+              <div className={styles.konselorName}>
+                {konselor?.nama_konselor || "Konselor"}
+              </div>
               <div className={styles.konselorSub}>
-                {konselor?.spesialisasi?.length ? renderSpesialisasi(konselor.spesialisasi) : "Speciality belum tersedia"}
+                {konselor?.spesialisasi?.length
+                  ? renderSpesialisasi(konselor.spesialisasi)
+                  : "Speciality belum tersedia"}
               </div>
               <div className={styles.konselorDesc}>{fallbackDesc(konselor)}</div>
 
               <div className={styles.konselorMeta}>
-                Durasi sesi <b>30 menit</b> <span className={styles.dot}>•</span> Minimal tanggal <b>{minTanggal}</b>
+                Durasi sesi <b>30 menit</b> <span className={styles.dot}>•</span>{" "}
+                Minimal tanggal <b>{minTanggal}</b>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* JADWAL PRAKTIK KONSELOR (HARI + JAM MULAI/SELESAI) */}
+        <div className={styles.practiceBox}>
+          <div className={styles.practiceTitle}>Jadwal Praktik</div>
+
+          {!jadwalPraktik.length ? (
+            <div className={styles.practiceEmpty}>Jadwal praktik belum tersedia.</div>
+          ) : (
+            <div className={styles.practiceList}>
+              {jadwalPraktik.map((g) => (
+                <div key={g.hari} className={styles.practiceRow}>
+                  <div className={styles.practiceDay}>{hariLabel(g.hari)}</div>
+
+                  <div className={styles.practiceTimes}>
+                    {g.items.map((it) => (
+                      <span key={it.id} className={styles.practiceTimePill}>
+                        {it.jam_mulai} – {it.jam_selesai}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* CONTROLS */}
@@ -304,15 +389,13 @@ export default function AppointmentBookingPage() {
           </div>
         </div>
 
-        <div className={styles.meta}>
-          Jadwal hari <b>{toHariID(tanggal)}</b>: <span>{jadwalText}</span>
-        </div>
-
         {err && <div className={styles.error}>{err}</div>}
         {ok && <div className={styles.ok}>{ok}</div>}
 
         {!jadwalHariIni.length ? (
-          <div className={styles.empty}>Tidak ada jadwal di hari ini. Coba pilih tanggal lain.</div>
+          <div className={styles.empty}>
+            Tidak ada jadwal di hari ini. Coba pilih tanggal lain.
+          </div>
         ) : (
           <div className={styles.grid}>
             {slotStarts.map((s) => {

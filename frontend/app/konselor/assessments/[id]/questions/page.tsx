@@ -196,11 +196,11 @@ export default function CMSQuestionsPage() {
         dimension: "",
         reverse_scored: false,
         options: [
-          { order_no: 1, label: "Tidak pernah", value: 0 },
-          { order_no: 2, label: "Jarang", value: 1 },
-          { order_no: 3, label: "Kadang-kadang", value: 2 },
-          { order_no: 4, label: "Sering", value: 3 },
-          { order_no: 5, label: "Sangat sering", value: 4 },
+          { order_no: 1, label: "Sangat tidak setuju", value: 1 },
+          { order_no: 2, label: "Tidak setuju", value: 2 },
+          { order_no: 3, label: "Netral", value: 3 },
+          { order_no: 4, label: "Setuju", value: 4 },
+          { order_no: 5, label: "Sangat Setuju", value: 5 },
         ],
       })
     );
