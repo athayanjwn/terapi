@@ -1,16 +1,33 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function VerifyEmailPage() {
   const sp = useSearchParams();
+  const router = useRouter();
+
   const email = (sp.get("email") || "").trim().toLowerCase();
 
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
+
+  // ✅ Tangkap hash dari Supabase: #access_token=...
+  useEffect(() => {
+    const hash = window.location.hash || "";
+    if (hash.includes("access_token=")) {
+      // (Opsional) tampilkan pesan singkat
+      setMsg("Email berhasil diverifikasi. Mengarahkan ke login…");
+
+      // bersihkan hash biar token tidak nempel di URL/history
+      window.history.replaceState(null, "", "/verify-email");
+
+      // redirect ke login
+      setTimeout(() => router.replace("/login"), 600);
+    }
+  }, [router]);
 
   const resend = async () => {
     setLoading(true);
